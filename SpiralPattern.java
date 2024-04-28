@@ -1,44 +1,42 @@
-package org.example;
+class Solution {
+    public List<Integer> spiralOrder(int[][] matrix) {
+        int row = matrix.length;
+        int col = matrix[0].length;
+        ArrayList<Integer> list = new ArrayList<>(row);
+        int left = 0, right = col - 1;
+        int top = 0, down = row - 1;
+        int dir = 0;
 
-// 1 2 3 4
-// 5 6 7 8
-// 9 10 11 12
-// 13 14 15 16
+        while (left <= right && top <= down){
 
-// 1 2 3 4 8 12 16 15 14 13 9 5 6 7 11 10
+            if(dir == 0){
+                for (int i=top;i<=right;i++){
+                    list.add(matrix[top][i]);
+                }
+                top++;
 
-public class Main {
-    public static void main(String[] args) {
-        int[][] arr = new int[][]{
-                 {1, 2, 3, 4},  // rs=1
-                 {5, 6, 7, 8},
-                 {9, 10, 11, 12},
-                 {13, 14,15,16}
-        };
-        int cStart = 0, cEnd = arr[0].length-1, rStart = 0, rEnd = arr.length-1;
-        
-        while (cStart < cEnd && rStart < rEnd){
-
-            for (int i = rStart; i<= cEnd; i++){
-                System.out.print(arr[rStart][i]+" ");
             }
-            rStart += 1;
-            for( int i = rStart; i<= rEnd; i++){
-                System.out.print(arr[i][cEnd]+" ");
+            if(dir == 1){
+                for (int i=top;i<=down;i++){
+                    list.add(matrix[i][right]);
+                }
+                right--;
             }
-            cEnd -= 1;
-            for( int i = cEnd; i>= cStart; i--){
-                System.out.print(arr[rEnd][i]+" ");
+            if(dir == 2){
+                for (int i=right;i>=left;i--){
+                    list.add(matrix[down][i]);
+                }
+                down--;
             }
-            rEnd -= 1;
-
-            for( int i = rEnd; i>= rStart; i--){
-                System.out.print(arr[i][cStart]+" ");
+            if (dir == 3){
+                for (int i=down;i>=top;i--){
+                    list.add(matrix[i][left]);
+                }
+                left++;
             }
-            cStart += 1;
-
+            dir = ((++dir)%4);
 
         }
-
+        return list;
     }
 }
