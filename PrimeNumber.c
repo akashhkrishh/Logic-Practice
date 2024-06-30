@@ -12,7 +12,8 @@ int main()
 {
     
     for(int i=2;i<=100;i++){
-        isPrime(i);
+        if(i>1)
+            isPrime(i);
     }
     return 0;
 }
